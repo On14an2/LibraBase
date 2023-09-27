@@ -1,0 +1,67 @@
+﻿<Window x:Class="LibraBase.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraBase"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" 
+                    Grid.RowSpan="2" Background="AliceBlue">
+            <TabItem Header="Users">
+                <StackPanel>
+                    <ListView Name="UserList">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="id" DisplayMemberBinding="{Binding Path=id}"/>
+                                <GridViewColumn Header="name" DisplayMemberBinding="{Binding Path=name}"/>
+                                <GridViewColumn Header="family" DisplayMemberBinding="{Binding Path=Family}"/>
+                                <GridViewColumn Header="books" DisplayMemberBinding="{Binding Path=books}"/> <!-- добавить вывод списка всплывающим окном или как нибудь с помощью списка -->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Books">
+                <StackPanel>
+                    <ListView Name="BookList">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="author" DisplayMemberBinding="{Binding Path=Author}"/>
+                                <GridViewColumn Header="act" DisplayMemberBinding="{Binding Path=Act}"/>
+                                <GridViewColumn Header="age" DisplayMemberBinding="{Binding Path=age}"/>
+                                <GridViewColumn Header="count" DisplayMemberBinding="{Binding Path=Count}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="BorrowedBooks">
+                <StackPanel>
+                    <ListView Name="BorrowedBooks">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="id" DisplayMemberBinding="{Binding Path=id}"/>
+                                <GridViewColumn Header="author" DisplayMemberBinding="{Binding Path=Author}"/>
+                                <GridViewColumn Header="act" DisplayMemberBinding="{Binding Path=Act}"/>
+                                <GridViewColumn Header="age" DisplayMemberBinding="{Binding Path=age}"/>
+                                <GridViewColumn Header="count" DisplayMemberBinding="{Binding Path=Count}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
