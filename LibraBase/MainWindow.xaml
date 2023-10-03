@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraBase"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="LibraBase" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -21,13 +21,33 @@
                     Grid.RowSpan="2" Background="AliceBlue">
             <TabItem Header="Users">
                 <StackPanel>
-                    <ListView Name="UserList">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <TextBlock>Юзеры</TextBlock>
+                        <ListView Name="UserList" Grid.Column="1">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="id" DisplayMemberBinding="{Binding Path=id}"/>
+                                    <GridViewColumn Header="name" DisplayMemberBinding="{Binding Path=name}"/>
+                                    <GridViewColumn Header="family" DisplayMemberBinding="{Binding Path=Family}"/>
+                            </GridView>
+                            </ListView.View>
+                        </ListView>
+                    <TextBlock> Выданные книги </TextBlock>
+                    <ListView x:Name="BookUserList">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="id" DisplayMemberBinding="{Binding Path=id}"/>
-                                <GridViewColumn Header="name" DisplayMemberBinding="{Binding Path=name}"/>
-                                <GridViewColumn Header="family" DisplayMemberBinding="{Binding Path=Family}"/>
-                                <GridViewColumn Header="books" DisplayMemberBinding="{Binding Path=books}"/> <!-- добавить вывод списка всплывающим окном или как нибудь с помощью списка -->
+                                <GridViewColumn Header="author" DisplayMemberBinding="{Binding Author}"/>
+                                <GridViewColumn Header="act" DisplayMemberBinding="{Binding Act}"/>
+                                <GridViewColumn Header="age" DisplayMemberBinding="{Binding age}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -35,31 +55,28 @@
             </TabItem>
             <TabItem Header="Books">
                 <StackPanel>
-                    <ListView Name="BookList">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <ListView Name="BookList" Grid.Column="1">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="author" DisplayMemberBinding="{Binding Path=Author}"/>
                                 <GridViewColumn Header="act" DisplayMemberBinding="{Binding Path=Act}"/>
                                 <GridViewColumn Header="age" DisplayMemberBinding="{Binding Path=age}"/>
-                                <GridViewColumn Header="count" DisplayMemberBinding="{Binding Path=Count}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="BorrowedBooks">
-                <StackPanel>
-                    <ListView Name="BorrowedBooks">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="id" DisplayMemberBinding="{Binding Path=id}"/>
-                                <GridViewColumn Header="author" DisplayMemberBinding="{Binding Path=Author}"/>
-                                <GridViewColumn Header="act" DisplayMemberBinding="{Binding Path=Act}"/>
-                                <GridViewColumn Header="age" DisplayMemberBinding="{Binding Path=age}"/>
-                                <GridViewColumn Header="count" DisplayMemberBinding="{Binding Path=Count}"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <ComboBox Grid.Column="2" Name="UserSelector" DisplayMemberPath="name" SelectedValuePath="id" />
+                    <ComboBox Grid.Column="2" Name="BookSelector" DisplayMemberPath="Act" SelectedValuePath="Act" />
+                    <Button Content="Добавить книгу" Click="AddSelectedBook"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
