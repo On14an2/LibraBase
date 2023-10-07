@@ -21,16 +21,26 @@
                     Grid.RowSpan="2" Background="AliceBlue">
             <TabItem Header="Users">
                 <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                    </Grid>
+                    <TextBox x:Name="SearchBox" />
+                    <Button Content="Search" Click="Search"/>
+                    <ListView Name="SearchResults">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Author" DisplayMemberBinding="{Binding Path=Author}" />
+                                <GridViewColumn Header="Act" DisplayMemberBinding="{Binding Path=Act}" />
+                                <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Path=age}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView Name="BookListView">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="id" DisplayMemberBinding="{Binding Path=id}"/>
+                                <GridViewColumn Header="name" DisplayMemberBinding="{Binding Path=name}"/>
+                                <GridViewColumn Header="family" DisplayMemberBinding="{Binding Path=Family}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                     <TextBlock>Юзеры</TextBlock>
                         <ListView Name="UserList" Grid.Column="1">
                             <ListView.View>
@@ -55,17 +65,7 @@
             </TabItem>
             <TabItem Header="Books">
                 <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                    </Grid>
-                    <ListView Name="BookList" Grid.Column="1">
+                    <ListView Name="BookList">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="author" DisplayMemberBinding="{Binding Path=Author}"/>

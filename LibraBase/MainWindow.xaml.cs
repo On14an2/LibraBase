@@ -22,10 +22,8 @@ namespace LibraBase
     public partial class MainWindow : Window
     {
         private List<Book> Books = new List<Book>();
-
         public MainWindow()
         {
-            int index = 0;
             InitializeComponent();
 
             List<User> users = new List<User>()
@@ -35,20 +33,20 @@ namespace LibraBase
             };
             UserList.ItemsSource = users;
             UserList.FontSize = 10;
-            List<Book> books = new List<Book>()
+            Books = new List<Book>()
             {
-                new Book("Author1", 1, 1999, 1, 27, 5),
-                new Book("Author2", 2, 1929, 1, 27, 2),
+                new Book("author1", 1, 1999, 1, 27, 5),
+                new Book("author2", 2, 1929, 1, 27, 2),
             };
-            BookList.ItemsSource = books;
+            BookList.ItemsSource = Books;
             BookList.FontSize = 10;
 
 
-            users[0].BorrowBook(books[0]);
-            users[0].BorrowBook(books[0]);
-            users[0].BorrowBook(books[1]);
-            users[1].BorrowBook(books[0]);
-            users[1].BorrowBook(books[1]);
+            users[0].BorrowBook(Books[0]);
+            users[0].BorrowBook(Books[0]);
+            users[0].BorrowBook(Books[1]);
+            users[1].BorrowBook(Books[0]);
+            users[1].BorrowBook(Books[1]);
             List<Book> allBooks = new List<Book>();
 
             foreach (var user in users)
@@ -62,7 +60,6 @@ namespace LibraBase
         {
             AddBookUser();
         }
-
         private void AddBookUser()
         {
             User selectedUser = (User)UserSelector.SelectedItem;
@@ -81,11 +78,37 @@ namespace LibraBase
         private void UpdateBookList()
         {
             List<Book> allBooks = new List<Book>();
-            foreach (var user in (UserList.ItemsSource as List<User>)!)
+            foreach (var user in ((UserList.ItemsSource as List<User>)!))
             {
                 allBooks.AddRange(user.Books);
             }
             BookUserList.ItemsSource = allBooks;
+        }
+
+        private void Search(object sender, RoutedEventArgs e)
+        {
+            SearchBoxResult();
+        }
+
+        private void SearchBoxResult()
+        {
+            if (SearchBox.Text.ToString().Length != 0)
+            {
+                string key = SearchBox.Text.ToLower();
+                var sortedList = new List<Book>();
+                foreach (var book in Books)
+                {
+                    if (book.Author.ToLower().Contains(key))
+                    {
+                        sortedList.Add(book);
+                    }
+                }   
+                BookListView.ItemsSource = sortedList;
+            }
+            else
+            {
+                BookListView.ItemsSource = Books;
+            }
         }
     }
 }

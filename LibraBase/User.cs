@@ -44,10 +44,6 @@ namespace LibraBase
                 Books.Remove(book);
                 book.Count++;
             }
-            else
-            {
-                MessageBox.Show("книга возвращена");
-            }
         }
     }
 }
